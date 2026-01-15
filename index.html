@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 💝</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:"Times New Roman", Times, serif;
+  background:linear-gradient(#fdecef,#fff5f7);
+  color:#7a3b3b;
+  overflow:hidden;
+}
+
+/* ===== SLIDER ===== */
+.container{
+  display:flex;
+  width:1000%;
+  height:100vh;
+  transition:.8s ease;
+}
+.page{
+  width:100vw;height:100vh;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+/* ===== MUSIC ===== */
+.music-btn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  font-size:26px;
+  cursor:pointer;
+  z-index:99;
+}
+
+/* ===== COUNTDOWN ===== */
+.count{
+  font-size:96px;
+  font-weight:bold;
+  animation:pulse 1s infinite;
+}
+@keyframes pulse{50%{transform:scale(1.1)}}
+
+/* ===== BIRTHDAY ===== */
+.stage{
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  width:100%;
+  margin-top:30px;
+}
+.char{font-size:88px;}
+.name{
+  margin-top:8px;
+  font-size:18px;
+  font-style:italic;
+}
+.cake-box{
+  position:relative;
+  width:160px;
+  height:180px;
+}
+.cake{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:100px;
+}
+.candles{
+  position:absolute;
+  bottom:85px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:12px;
+  transition:.8s ease;
+}
+.candle{
+  font-size:26px;
+  animation:flicker .6s infinite alternate;
+}
+@keyframes flicker{to{opacity:.6;}}
+.candles.off{
+  opacity:0;
+  transform:translateX(-50%) translateY(-50px);
+}
+.age{
+  position:absolute;
+  top:5%;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:46px;
+  font-weight:bold;
+  color:#ff6b81;
+  display:none;
+}
+
+/* ===== ACTION ===== */
+.actions{margin:18px 0;}
+button{
+  background:#ffb6c1;
+  border:none;
+  border-radius:25px;
+  padding:12px 26px;
+  margin:6px;
+  font-size:16px;
+  cursor:pointer;
+}
+.message{
+  margin-top:14px;
+  font-style:italic;
+}
+
+/* ===== LOVE ===== */
+.love{
+  position:fixed;
+  font-size:18px;
+  animation:floatLove 3.5s forwards;
+}
+@keyframes floatLove{
+  to{opacity:0;transform:translateY(-240px);}
+}
+
+/* ===== LETTER ===== */
+.envelope{
+  width:300px;height:200px;
+  background:#ffb6cc;
+  border-radius:16px;
+  position:relative;
+  cursor:pointer;
+}
+.envelope:before{
+  content:"";
+  position:absolute;inset:0;
+  clip-path:polygon(0 0,100% 0,50% 55%);
+  background:#ff8fb1;
+}
+.seal{
+  position:absolute;
+  bottom:70px;left:50%;
+  transform:translateX(-50%);
+  width:44px;height:44px;
+  border-radius:50%;
+  background:#e11d48;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+}
+.letter{
+  position:absolute;
+  top:20px;left:50%;
+  transform:translateX(-50%);
+  width:92%;height:0;
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  transition:1.4s ease;
+}
+.envelope.open .letter{height:75vh;}
+.letter-inner{
+  padding:20px;height:100%;overflow-y:auto;
+}
+.paragraph{
+  opacity:0;
+  transform:translateY(12px);
+  transition:1s;
+  margin-bottom:16px;
+  text-align:left;
+  line-height:1.6;
+}
+.paragraph.show{opacity:1;transform:none;}
+.signature{
+  text-align:right;
+  font-style:italic;
+  font-weight:bold;
+}
+
+/* ===== FLOAT ===== */
+.float-area{position:relative;width:100%;height:100%;overflow:hidden;}
+.float-item{
+  position:absolute;
+  bottom:-120px;
+  animation:floatUp linear infinite;
+}
+.float-item img{
+  width:90px;height:90px;
+  border-radius:14px;
+  object-fit:cover;
+}
+.float-text{
+  padding:8px 18px;
+  background:rgba(255,255,255,.7);
+  border-radius:999px;
+  font-style:italic;
+  font-weight:bold;
+}
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:0;}
+  15%{opacity:1;}
+  to{transform:translateY(-120vh);opacity:0;}
+}
+
+/* ===== GIFT BOX ===== */
+.gift-box{
+  font-size:130px;
+  cursor:pointer;
+}
+.gift-box.shake{
+  animation:shake .3s;
+}
+@keyframes shake{
+  0%{transform:rotate(0)}
+  25%{transform:rotate(-6deg)}
+  50%{transform:rotate(6deg)}
+  75%{transform:rotate(-6deg)}
+  100%{transform:rotate(0)}
+}
+.gift-progress{
+  margin-top:16px;
+  font-style:italic;
+}
+
+/* ===== CARDS ===== */
+.cards{display:flex;gap:18px;}
+.card{
+  width:90px;height:130px;
+  background:#fff;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+}
+.card.open{
+  background:#ffe4ec;
+  font-size:52px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="music-btn" onclick="toggleMusic()">🎵</div>
+<audio id="music" loop>
+  <source src="music.mp3">
+</audio>
+
+<div class="container" id="container">
+
+<!-- 1 -->
+<div class="page">
+  <div style="font-style:italic;">Có một điều đang chờ anh phía sau…</div>
+</div>
+
+<!-- 2 -->
+<div class="page">
+  <div class="count" id="count">10</div>
+</div>
+
+<!-- 3 -->
+<div class="page">
+  <h1>Happy Birthday 🎂</h1>
+  <div class="subtitle">Tuổi 20 của anh 23-01-2026 🫶🏻</div>
+</div>
+
+<!-- 4 -->
+<div class="page">
+  <h1>Happy Birthday 🎂</h1>
+  <div class="stage">
+    <div><div class="char">🐻</div><div class="name">anh Mạnh</div></div>
+    <div class="cake-box">
+      <div class="candles" id="candles">
+        <div class="candle">🔥</div><div class="candle">🔥</div><div class="candle">🔥</div>
+      </div>
+      <div class="age" id="age">20</div>
+      <div class="cake">🎂</div>
+    </div>
+    <div><div class="char">🐻‍❄️</div><div class="name">bé Trang</div></div>
+  </div>
+  <div class="actions">
+    <button onclick="blow()">🎂 Thổi nến</button>
+    <button onclick="clap()">👏 Vỗ tay</button>
+  </div>
+  <div class="message">
+    Chúc anh tuổi mới luôn mạnh mẽ, ấm áp<br>và có em đồng hành mỗi ngày 🤍
+  </div>
+</div>
+
+<!-- 5 LETTER -->
+<div class="page">
+  <h3>💌 Chạm để mở thư</h3>
+  <div class="envelope" onclick="openLetter(this)">
+    <div class="letter"><div class="letter-inner">
+      <div class="paragraph">Chúc mừng sinh nhật anh.</div>
+      <div class="paragraph">Cảm ơn anh vì mỗi khi em buồn, anh luôn là người nhận ra đầu tiên và cũng là người ở bên an ủi em.</div>
+      <div class="paragraph"><strong>Nhưng chỉ cần anh vẫn ở đây, với em, đã là đủ rồi.</strong></div>
+      <div class="paragraph">Em không cần anh phải chứng minh điều gì với ai cả. Ở cạnh anh, em thấy thoải mái và thật lòng vui khi được ở cạnh anh.</div>
+      <div class="paragraph">Em không dám nói trước tương lai sẽ thế nào, nhưng nếu sau này có cơ hội đi cùng nhau lâu dài, người đồng hành với em vẫn sẽ là anh.</div>
+      <div class="paragraph">Chúc anh luôn tin vào chính mình, không nản lòng và gặp thật nhiều may mắn.</div>
+      <div class="paragraph">Cũng chúc gia đình anh luôn mạnh khỏe, bình an và tràn ngập những điều tốt đẹp.</div>
+      <div class="paragraph signature">từ bé iu của anh :33<br>— bé Trang hội</div>
+    </div></div>
+    <div class="seal">❤️</div>
+  </div>
+</div>
+
+<!-- 6 FLOAT -->
+<div class="page">
+  <div class="float-area">
+    <div class="float-item" style="left:5%;animation-duration:13s;"><img src="pic1.jpg"></div>
+    <div class="float-item" style="left:18%;animation-duration:16s;"><img src="pic2.jpg"></div>
+    <div class="float-item" style="left:35%;animation-duration:14s;"><img src="pic3.jpg"></div>
+    <div class="float-item" style="left:55%;animation-duration:18s;"><img src="pic4.jpg"></div>
+    <div class="float-item" style="left:72%;animation-duration:15s;"><img src="pic5.jpg"></div>
+    <div class="float-item" style="left:88%;animation-duration:20s;"><img src="pic6.jpg"></div>
+    <div class="float-item" style="left:30%;animation-duration:12s;"><div class="float-text">Đoàn Quang Mạnh</div></div>
+    <div class="float-item" style="left:60%;animation-duration:17s;"><div class="float-text">Trần Thùy Trang</div></div>
+  </div>
+</div>
+
+<!-- 7 GIFT -->
+<div class="page">
+  <h3>Ấn nhiều lần để mở quà nha ❤️</h3>
+  <div class="gift-box" id="giftBox" onclick="openGift()">💝</div>
+  <div class="gift-progress" id="giftText">Ấn 5 lần nè 💗</div>
+</div>
+
+<!-- 8 CARDS -->
+<div class="page">
+  <h3>Anh chọn một thẻ quà đi 💗</h3>
+  <div class="cards">
+    <div class="card" onclick="pickCard(1)">❓</div>
+    <div class="card" onclick="pickCard(2)">❓</div>
+    <div class="card" onclick="pickCard(3)">❓</div>
+  </div>
+</div>
+
+<!-- 9 -->
+<div class="page">
+  <h3 style="font-style:italic;">
+    Để anh chọn cho có không khí thui,<br>
+    còn 3 thứ là của anh hếtt,<br>
+    tất nhiên là có em rùi ❤️
+  </h3>
+</div>
+
+</div>
+
+<script>
+let index=0,startX=0,started=false,playing=false,chosen=false;
+let giftCount=0;
+
+const c=document.getElementById("container");
+const music=document.getElementById("music");
+
+document.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+document.addEventListener("touchend",e=>{
+  let endX=e.changedTouches[0].clientX;
+  if(startX-endX>50 && index<8) index++;
+  if(endX-startX>50 && index>0) index--;
+  c.style.transform=`translateX(-${index*100}vw)`;
+  if(!playing){music.play();playing=true;}
+  if(index===1) startCount();
+});
+
+function toggleMusic(){music.paused?music.play():music.pause();}
+
+function startCount(){
+  if(started) return;
+  started = true;
+
+  let n = 10;
+  const el = document.getElementById("count");
+
+  el.textContent = n; // 👈 hiện 10 NGAY, không chờ
+
+  const t = setInterval(()=>{
+    n--;
+    el.textContent = n;
+
+    if(n <= 0){
+      clearInterval(t);
+      setTimeout(()=>{
+        index = 2;
+        c.style.transform = `translateX(-${index*100}vw)`;
+      }, 400);
+    }
+  }, 600); // 👈 nhanh hơn rõ rệt
+}
+
+function blow(){
+  document.getElementById("candles").classList.add("off");
+  setTimeout(()=>document.getElementById("age").style.display="block",800);
+}
+
+function clap(){
+  for(let i=0;i<18;i++){
+    const l=document.createElement("div");
+    l.className="love";
+    l.innerText="💗 iu anh";
+    l.style.left=Math.random()*window.innerWidth+"px";
+    l.style.bottom="0";
+    document.body.appendChild(l);
+    setTimeout(()=>l.remove(),3500);
+  }
+}
+
+function openLetter(el){
+  el.classList.add("open");
+  document.querySelectorAll(".paragraph")
+    .forEach((p,i)=>setTimeout(()=>p.classList.add("show"),i*450));
+}
+
+function openGift(){
+  const box=document.getElementById("giftBox");
+  const text=document.getElementById("giftText");
+  giftCount++;
+  box.classList.add("shake");
+  setTimeout(()=>box.classList.remove("shake"),300);
+
+  if(giftCount<5){
+    text.innerText=`Còn ${5-giftCount} lần nữa nè 💞`;
+  }else{
+    text.innerText="Mở rồi đó 💖";
+    setTimeout(()=>{
+      index=7;
+      c.style.transform=`translateX(-${index*100}vw)`;
+    },900);
+  }
+}
+
+function pickCard(n){
+  if(chosen) return;
+  chosen=true;
+  const cards=document.querySelectorAll(".card");
+  const gifts=["🎧","📘",'<img src="gift.jpg" width="60">'];
+  cards[n-1].classList.add("open");
+  cards[n-1].innerHTML=gifts[n-1];
+  setTimeout(()=>{
+    cards.forEach((c,i)=>{
+      if(i!==n-1){
+        c.classList.add("open");
+        c.innerHTML=gifts[i];
+      }
+    });
+  },800);
+}
+/* ===== KEYBOARD CONTROL FOR LAPTOP ===== */
+document.addEventListener("keydown", function(e){
+  if(e.key === "ArrowRight" && index < 8){
+    index++;
+  }
+  if(e.key === "ArrowLeft" && index > 0){
+    index--;
+  }
+  c.style.transform = `translateX(-${index*100}vw)`;
+
+  if(!playing){
+    music.play();
+    playing = true;
+  }
+});
+// ===== UNLOCK USER INTERACTION (FIX GITHUB PAGES) =====
+function unlock(){
+  if(!playing){
+    music.play().catch(()=>{});
+    playing = true;
+  }
+  if(index === 1) startCount();
+
+  document.removeEventListener("click", unlock);
+  document.removeEventListener("touchstart", unlock);
+  document.removeEventListener("keydown", unlock);
+}
+
+document.addEventListener("click", unlock);
+document.addEventListener("touchstart", unlock);
+document.addEventListener("keydown", unlock);
+</script>
+
+</body>
+</html>
