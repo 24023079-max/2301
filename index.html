@@ -440,7 +440,11 @@ function pickCard(n){
   if(chosen) return;
   chosen=true;
   const cards=document.querySelectorAll(".card");
-  const gifts=["🎧","📘",'<img src="gift.jpg" width="60">'];
+  const gifts=[
+  "🎧",
+  "<div style='font-size:14px;line-height:1.4;font-style:italic;'>bật mí<br>hình trái tim ❤️</div>",
+  "<img src='gift.jpg' width='60'>"
+];
   cards[n-1].classList.add("open");
   cards[n-1].innerHTML=gifts[n-1];
   setTimeout(()=>{
